@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<odoo>
+
+    <record model="ir.ui.view" id="view_connect_mysql_form">
+        <field name="name">connect.mysql.form</field>
+        <field name="model">connect.mysql</field>
+        <field name="arch" type="xml">
+            <form string="Connect mysql">
+                <sheet>
+                    <group>
+                        <field name="server_name"  />
+                        <field name="database_name"/>
+                        <field name="user_name"/>
+                        <field name="password"  password="True"/>
+                        <field name="query" placeholder="Select * from sometable"/>
+                        <button name="mysql_connect" string="Execute Query"  icon="fa-refresh" type="object"/>
+                    </group>
+                    <field name="result"/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_connect_mysql">
+        <field name="name">Connect mysql</field>
+        <field name="res_model">connect.mysql</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_connect_mysql_form"/>
+    </record>
+    <menuitem id="mysql_menuitem" name="Mysql" sequence="0" groups="base.group_user" web_icon="mysql_connection,static/description/icon.png"/>
+    <menuitem name="Connect mysql" id="menu_connect_mysql" parent="mysql_menuitem" action="action_connect_mysql"/>
+</odoo>
